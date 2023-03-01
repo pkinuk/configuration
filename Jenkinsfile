@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('DockerHubPkinuk')
+	}
 
     tools {
         jdk 'Java17'
@@ -35,12 +38,17 @@ pipeline {
         stage('Push docker hub') {
               steps {
                 script {
-                  docker.withRegistry('https://registry.hub.docker.com', 'DockerHubPkinuk') {
+                    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                     sh 'docker push dev/configuration:1.0.0-SNAPSHOT'
-                  }
                 }
               }
         }
 
+    }
+
+    post {
+        always {
+            sh 'docker logout'
+        }
     }
 }
