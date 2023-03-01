@@ -44,8 +44,7 @@ pipeline {
               steps {
                 script {
                   docker.withRegistry('https://registry.hub.docker.com', 'DockerHubPkinuk') {
-                    def image = docker.build('pkinuk/dev/configuration')
-                    image.push()
+                    sh 'docker push dev/configuration:1.0.0-SNAPSHOT'
                   }
                 }
               }
