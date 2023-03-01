@@ -39,7 +39,7 @@ pipeline {
               steps {
                 script {
                     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                    sh 'docker push pkinuk/dev/configuration:1.0.0-SNAPSHOT'
+                    sh 'docker push pkinuk/configuration:1.0.0-SNAPSHOT'
                 }
               }
         }
