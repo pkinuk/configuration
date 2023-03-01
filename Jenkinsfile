@@ -29,5 +29,17 @@ pipeline {
                         }
             }
         }
+
+        stage('Push docker hub') {
+              steps {
+                script {
+                  docker.withRegistry('https://registry.hub.docker.com', 'DockerHubPkinuk') {
+                    def image = docker.build('pkinuk/dev/configuration')
+                    image.push()
+                  }
+                }
+              }
+        }
+
     }
 }
