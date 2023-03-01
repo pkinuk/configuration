@@ -2,11 +2,15 @@ pipeline {
     agent any
 
     tools {
-        maven 'M3'
-        jdk 'jdk17'
+        jdk 'Java17'
     }
 
     stages {
+        stage('Check version') {
+            steps {
+                sh 'mvn -version'
+            }
+        }
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/pkinuk/configuration.git'
