@@ -18,14 +18,6 @@ pipeline {
             }
         }
 
-        stage('Get POM version') {
-          steps {
-            script {
-              def pom = readMavenPom file: 'pom.xml'
-              echo "POM version is ${pom.version}"
-            }
-          }
-        }
 
         stage('Build') {
             steps {
