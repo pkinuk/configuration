@@ -27,7 +27,7 @@ pipeline {
 
                 // Run the build and capture the exit code
                 script {
-                    def buildExitCode = sh(script: './mvnw clean install', returnStatus: true)
+                    def buildExitCode = sh(script: './mvnw clean install -Dquarkus.container-image.group=pkinuk', returnStatus: true)
                     if (buildExitCode != 0) {
                         error('Build failed!')
                     }
