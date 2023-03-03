@@ -2,6 +2,10 @@ pipeline {
     agent any
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DockerHubPkinuk')
+		PROJECT_ID = 'linuxfoundation-374523'
+        CLUSTER_NAME = 'linuxfoundation'
+        LOCATION = 'europe-west2'
+        CREDENTIALS_ID = 'linuxfoundation-374523'
 	}
 
     tools {
@@ -45,6 +49,18 @@ pipeline {
               }
         }
 
+        stage('Deploy to GKE') {
+            steps{
+                step([
+                $class: 'KubernetesEngineBuilder',
+                projectId: env.PROJECT_ID,
+                clusterName: env.CLUSTER_NAME,
+                location: env.LOCATION,
+                manifestPattern: ' target/kubernetes/kubernetes.yml',
+                credentialsId: env.CREDENTIALS_ID,
+                verifyDeployments: true])
+            }
+        }
     }
 
     post {
