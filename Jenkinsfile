@@ -56,7 +56,7 @@ pipeline {
                 projectId: env.PROJECT_ID,
                 clusterName: env.CLUSTER_NAME,
                 location: env.LOCATION,
-                manifestPattern: ' target/kubernetes/kubernetes.yml',
+                manifestPattern: 'target/kubernetes/kubernetes.yml',
                 credentialsId: env.CREDENTIALS_ID,
                 verifyDeployments: true])
             }
